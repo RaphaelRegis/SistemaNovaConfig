@@ -1,0 +1,38 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: application-api-gateway
+  config:
+    import: "optional:configserver:http://localhost:8888"
+  cloud:
+    gateway:
+      routes:
+        - id: clientes-service
+          uri: lb://clientes-service
+          predicates:
+            - Path=/api/clientes/**
+        - id: enderecos-service
+          uri: lb://enderecos-service
+          predicates:
+            - Path=/api/enderecos/**
+        - id: materiais-service
+          uri: lb://materiais-service
+          predicates:
+            - Path=/api/materiais/**
+        - id: servicos-service
+          uri: lb://servicos-service
+          predicates:
+            - Path=/api/servicos/**
+        - id: trabalhos-service
+          uri: lb://trabalhos-service
+          predicates:
+            - Path=/api/trabalhos/**
+  main:
+    web-application-type: reactive
+  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
