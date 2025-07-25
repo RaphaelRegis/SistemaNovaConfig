@@ -6,11 +6,12 @@ spring:
     driverClassName: org.h2.Driver
     username: sa
     password: 
-    initialization-mode: always
   h2:
     console:
       enabled: true
       path: /h2-console
+  jpa:
+    defer-datasource-initialization: true
 
 server:
   port: 8086
